@@ -1,5 +1,6 @@
 package by.epam.evm.text.data.component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Composite implements Component {
@@ -11,7 +12,7 @@ public class Composite implements Component {
     }
 
     @Override
-    public void add(Component component) {
-
+    public List<Component> getComponents() {
+        return new ArrayList<>(components);
     }
 }

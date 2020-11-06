@@ -1,5 +1,8 @@
 package by.epam.evm.text.data.component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Leaf implements Component {
 
     private final LeafType type;
@@ -19,9 +22,10 @@ public class Leaf implements Component {
     }
 
     @Override
-    public void add(Component component) {
-
+    public List<Component> getComponents() {
+        return new ArrayList<>();
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -52,4 +56,6 @@ public class Leaf implements Component {
                 ", value='" + value + '\'' +
                 '}';
     }
+
+
 }
