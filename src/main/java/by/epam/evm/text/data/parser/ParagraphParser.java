@@ -1,9 +1,19 @@
 package by.epam.evm.text.data.parser;
 
-//TODO change split without delete lexeme . ! ?
 public class ParagraphParser extends AbstractParser {
+
+    private final static String SPLITTER = "\\s\\s";
+
+    public ParagraphParser() {
+    }
+
+    //package-private for test
+    ParagraphParser(Parser successor) {
+        super(successor);
+    }
+
     @Override
-    String createSplitter() {
-        return "[\\.\\?\\!]";
+    public String createSplitter() {
+        return SPLITTER;
     }
 }

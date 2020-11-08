@@ -1,7 +1,7 @@
 package by.epam.evm.text.data.parser;
 
-import by.epam.evm.text.data.component.Component;
-import by.epam.evm.text.data.component.Composite;
+import by.epam.evm.text.model.Component;
+import by.epam.evm.text.model.Composite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,13 @@ public abstract class AbstractParser implements Parser {
 
     private Parser successor;
 
-//    protected Parser getSuccessor() {
-//        return successor;
-//    }
+    public AbstractParser() {
+    }
+
+    //package-private for test
+    AbstractParser(Parser successor) {
+        this.successor = successor;
+    }
 
     protected void setSuccessor(Parser successor) {
         this.successor = successor;
@@ -29,10 +33,9 @@ public abstract class AbstractParser implements Parser {
             Component component = successor.parse(node);
             components.add(component);
         }
-
         return new Composite(components);
     }
 
-    abstract String createSplitter();
+    public abstract String createSplitter();
 
 }

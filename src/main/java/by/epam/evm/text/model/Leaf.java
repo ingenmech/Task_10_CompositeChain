@@ -1,16 +1,24 @@
-package by.epam.evm.text.data.component;
+package by.epam.evm.text.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Leaf implements Component {
+public final class Leaf implements Component {
 
     private final LeafType type;
     private final String value;
 
-    public Leaf(LeafType type, String value) {
+    private Leaf(LeafType type, String value) {
         this.type = type;
         this.value = value;
+    }
+
+    public static Leaf expression(String value) {
+        return new Leaf(LeafType.EXPRESSION, value);
+    }
+
+    public static Leaf word(String value) {
+        return new Leaf(LeafType.WORD, value);
     }
 
     public LeafType getType() {
@@ -22,7 +30,7 @@ public class Leaf implements Component {
     }
 
     @Override
-    public List<Component> getComponents() {
+    public List<Component> getChildren() {
         return new ArrayList<>();
     }
 
@@ -51,10 +59,7 @@ public class Leaf implements Component {
 
     @Override
     public String toString() {
-        return "Leaf{" +
-                "type=" + type +
-                ", value='" + value + '\'' +
-                '}';
+        return "Leaf{type=" + type + ", value='" + value + '\'' + '}';
     }
 
 

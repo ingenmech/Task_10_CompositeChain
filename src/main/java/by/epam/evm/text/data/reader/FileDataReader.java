@@ -1,7 +1,5 @@
 package by.epam.evm.text.data.reader;
 
-import by.epam.evm.text.data.DataException;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
