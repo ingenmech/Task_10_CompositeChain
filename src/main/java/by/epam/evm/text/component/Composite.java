@@ -1,9 +1,9 @@
-package by.epam.evm.text.model;
+package by.epam.evm.text.component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Composite implements Component {
+public class Composite implements Component {
 
     private final List<Component> components;
 

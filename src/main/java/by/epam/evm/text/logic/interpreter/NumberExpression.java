@@ -1,10 +1,10 @@
 package by.epam.evm.text.logic.interpreter;
 
-public class ExpressionNumber extends AbstractExpression {
+public class NumberExpression extends AbstractExpression {
 
-    private double number;
+    private final double number;
 
-    public ExpressionNumber(double number) {
+    public NumberExpression(double number) {
         this.number = number;
     }
 
@@ -12,5 +12,4 @@ public class ExpressionNumber extends AbstractExpression {
     public void interpret(Context context) {
         context.pushValue(number);
     }
-
 }

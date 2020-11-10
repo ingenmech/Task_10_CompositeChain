@@ -1,9 +1,9 @@
-package by.epam.evm.text.model;
+package by.epam.evm.text.component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Leaf implements Component {
+public class Leaf implements Component {
 
     private final LeafType type;
     private final String value;

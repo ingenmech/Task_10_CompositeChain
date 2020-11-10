@@ -1,6 +1,6 @@
 package by.epam.evm.text.logic.sorter;
 
-import by.epam.evm.text.model.Component;
+import by.epam.evm.text.component.Component;
 
 import java.util.Comparator;
 

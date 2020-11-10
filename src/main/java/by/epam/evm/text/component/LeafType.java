@@ -1,4 +1,4 @@
-package by.epam.evm.text.model;
+package by.epam.evm.text.component;
 
 public enum  LeafType {
     WORD,

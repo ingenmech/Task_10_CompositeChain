@@ -1,9 +1,9 @@
 package by.epam.evm.text.logic.interpreter;
 
-import by.epam.evm.text.model.Component;
-import by.epam.evm.text.model.Composite;
-import by.epam.evm.text.model.Leaf;
-import by.epam.evm.text.model.LeafType;
+import by.epam.evm.text.component.Component;
+import by.epam.evm.text.component.Composite;
+import by.epam.evm.text.component.Leaf;
+import by.epam.evm.text.component.LeafType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class Calculator {
             Component calculatedComponent = calculate(child);
             calculatedComponents.add(calculatedComponent);
         }
-        return new Composite(children);
+        return new Composite(calculatedComponents);
     }
 
     private Leaf calculateExpression(Leaf expression) {
@@ -46,6 +46,7 @@ public class Calculator {
         }
         Double result = context.popValue();
         String value = result.toString();
+
         return Leaf.word(value);
     }
 
@@ -60,26 +61,24 @@ public class Calculator {
 
             switch (lexeme) {
                 case "+":
-                    expressions.add(new ExpressionPlus());
+                    expressions.add(new PlusExpression());
                     break;
                 case "-":
-                    expressions.add(new ExpressionMinus());
+                    expressions.add(new MinusExpression());
                     break;
                 case "*":
-                    expressions.add(new ExpressionMultiply());
+                    expressions.add(new MultiplyExpression());
                     break;
                 case "/":
-                    expressions.add(new ExpressionDivide());
+                    expressions.add(new DivideExpression());
                     break;
                 default:
                     if (lexeme.matches(ANY_DIGIT)) {
                         int number = Integer.parseInt(lexeme);
-                        expressions.add(new ExpressionNumber(number));
+                        expressions.add(new NumberExpression(number));
                     }
             }
         }
         return expressions;
     }
-
-
 }

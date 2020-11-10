@@ -1,12 +1,13 @@
 package by.epam.evm.text.logic;
 
-import by.epam.evm.text.model.Component;
-import by.epam.evm.text.model.Composite;
-import by.epam.evm.text.model.Leaf;
+import by.epam.evm.text.component.Component;
+import by.epam.evm.text.component.Composite;
+import by.epam.evm.text.component.Leaf;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class RestorerTest {
 
@@ -23,7 +24,7 @@ public class RestorerTest {
                             Leaf.word("word!"))
                     ))
             ),
-            new Composite(Arrays.asList(
+            new Composite(Collections.singletonList(
                     new Composite(Arrays.asList(
                             Leaf.word("Word"),
                             Leaf.expression("[expression]"),
@@ -34,15 +35,6 @@ public class RestorerTest {
 
     @Test
     public void testRestoreShouldReturnTextWhenDataIsValid() {
-
-        Restorer restorer = new Restorer();
-        String actual = restorer.restore(COMPONENT);
-
-        Assert.assertEquals(EXPECTED, actual);
-    }
-
-    @Test
-    public void testSortShouldReturnTextWhenDataIsValid() {
 
         Restorer restorer = new Restorer();
         String actual = restorer.restore(COMPONENT);

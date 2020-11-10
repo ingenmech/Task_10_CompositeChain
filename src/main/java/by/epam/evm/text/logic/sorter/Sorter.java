@@ -1,42 +1,22 @@
 package by.epam.evm.text.logic.sorter;
 
-import by.epam.evm.text.model.Component;
-import by.epam.evm.text.model.Composite;
-import by.epam.evm.text.model.Leaf;
+import by.epam.evm.text.component.Component;
+import by.epam.evm.text.component.Composite;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-//TODO Think about immutable copy
+
 public class Sorter {
 
     public Component sortParagraph(Component component) {
 
-        List<Component> text = component.getChildren();
-        Comparator comparator = new ParagraphComparator();
+        Comparator<Component> comparator = new ParagraphComparator();
+        Component copiedComponent = copy(component);
+        List<Component> text = copiedComponent.getChildren();
         text.sort(comparator);
-        Component sortedComponent = new Composite(text);
-
-        return copy(sortedComponent);
-    }
-
-    public Component sortWord(Component component) {
-
-        Comparator comparator = new WordComparator();
-        List<Component> sortedParagraph = new ArrayList<>();
-
-        for (Component paragraph : component.getChildren()) {
-            List<Component> sortedWords = new ArrayList<>();
-            for (Component sentence : paragraph.getChildren()) {
-                sortedWords = sentence.getChildren();
-                sortedWords.sort(comparator);
-            }
-            Component sortedComponent = new Composite(sortedWords);
-            sortedParagraph.add(sortedComponent);
-        }
-
-        return new Composite(sortedParagraph);
+        return new Composite(text);
     }
 
     //recursion
@@ -44,7 +24,7 @@ public class Sorter {
 
         List<Component> children = component.getChildren();
         if (children.isEmpty()) {
-            Leaf leaf = (Leaf) component;
+            Component leaf = component;
             return leaf;
         }
         List<Component> copiedChildren = new ArrayList<>();
@@ -53,5 +33,26 @@ public class Sorter {
             copiedChildren.add(copiedChild);
         }
         return new Composite(copiedChildren);
+    }
+
+    public Component sortWord(Component component) {
+
+        Comparator<Component> comparator = new WordComparator();
+        List<Component> sortedParagraphs = new ArrayList<>();
+
+        for (Component paragraph : component.getChildren()) {
+            List<Component> sortedSentences = new ArrayList<>();
+
+            for (Component sentence : paragraph.getChildren()) {
+                Component copiedSentence = copy(sentence);
+                List<Component> sortedWords = copiedSentence.getChildren();
+                sortedWords.sort(comparator);
+                Component sortedSentence = new Composite(sortedWords);
+                sortedSentences.add(sortedSentence);
+            }
+            Component sortedParagraph = new Composite(sortedSentences);
+            sortedParagraphs.add(sortedParagraph);
+        }
+        return new Composite(sortedParagraphs);
     }
 }
