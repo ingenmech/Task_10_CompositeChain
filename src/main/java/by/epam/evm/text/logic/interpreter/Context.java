@@ -3,7 +3,8 @@ package by.epam.evm.text.logic.interpreter;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Context {
+// package-private
+class Context {
 
     private final Deque<Double> values = new ArrayDeque<>();
 

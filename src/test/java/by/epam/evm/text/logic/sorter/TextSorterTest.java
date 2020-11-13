@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class SorterTest {
+public class TextSorterTest {
 
     private final static Component COMPONENT = new Composite(Arrays.asList(
             new Composite(Arrays.asList(
@@ -74,7 +74,7 @@ public class SorterTest {
     @Test
     public void testSortParagraphShouldReturnSortedTextByParagraphWhenDataIsCorrect() {
 
-        Sorter sorter = new Sorter();
+        TextSorter sorter = new TextSorter();
         //when
         Component actual = sorter.sortParagraph(COMPONENT);
         //then
@@ -84,7 +84,7 @@ public class SorterTest {
     @Test
     public void testSortWordShouldReturnSortedTextByWordInSentenceWhenDataIsCorrect() {
 
-        Sorter sorter = new Sorter();
+        TextSorter sorter = new TextSorter();
         //when
         Component actual = sorter.sortWord(COMPONENT);
         //then

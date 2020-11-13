@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class RestorerTest {
+public class TextRestorerTest {
 
     private final static String EXPECTED = "Word [expression] word. Word word!\nWord [expression] word?";
     private final static Component COMPONENT = new Composite(Arrays.asList(
@@ -36,7 +36,7 @@ public class RestorerTest {
     @Test
     public void testRestoreShouldReturnTextWhenDataIsValid() {
 
-        Restorer restorer = new Restorer();
+        TextRestorer restorer = new TextRestorer();
         String actual = restorer.restore(COMPONENT);
 
         Assert.assertEquals(EXPECTED, actual);

@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -16,40 +15,17 @@ import static org.mockito.Mockito.when;
 
 public class TextParserTest {
 
-    private final static String TEXT = "Word [expression] word.\nWord [expression] word.";
+    private final static String TEXT = "Word [expression] word.\nWord expression word.";
     private final static Component EXPECTED = new Composite(Arrays.asList(
-            new Composite(Collections.singletonList(
-                    new Composite(Arrays.asList(
-                            Leaf.word("Word"),
-                            Leaf.expression("[expression]"),
-                            Leaf.word("word."))
-                    ))
-            ),
-            new Composite(Collections.singletonList(
-                    new Composite(Arrays.asList(
-                            Leaf.word("Word"),
-                            Leaf.expression("[expression]"),
-                            Leaf.word("word."))
-                    ))
-            )
-
-    ));
-
-    private final static Component PARAGRAPH = new Composite(Collections.singletonList(
-            new Composite(Arrays.asList(
-                    Leaf.word("Word"),
-                    Leaf.expression("[expression]"),
-                    Leaf.word("word."))
-            ))
-    );
+            Leaf.word("Word [expression] word."),
+            Leaf.word("Word expression word.")));
 
     @Test
     public void testParseShouldReturnComponentWhenDataIsValid() {
         //given
-        AbstractParser paragraphParser = Mockito.mock(ParagraphParser.class);
-        when(paragraphParser.parse(anyString())).thenReturn(PARAGRAPH).thenReturn(PARAGRAPH);
-        AbstractParser textParser = new TextParser();
-        textParser.setSuccessor(paragraphParser);
+        Parser paragraphParser = Mockito.mock(ParagraphParser.class);
+        when(paragraphParser.parse(anyString())).thenAnswer(invocation -> Leaf.word(invocation.getArgument(0)));
+        Parser textParser = new TextParser(paragraphParser);
         //when
         Component actual = textParser.parse(TEXT);
         //then

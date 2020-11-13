@@ -14,34 +14,18 @@ import static org.mockito.Mockito.when;
 
 public class ParagraphParserTest {
 
-    private final static String TEXT = "Word [expression] word.  Word [expression] word.";
+    private final static String TEXT = "Word expression word. Word word word.";
     private final static Component EXPECTED = new Composite(Arrays.asList(
-            new Composite(Arrays.asList(
-                    Leaf.word("Word"),
-                    Leaf.expression("[expression]"),
-                    Leaf.word("word."))
-            ),
-            new Composite(Arrays.asList(
-                    Leaf.word("Word"),
-                    Leaf.expression("[expression]"),
-                    Leaf.word("word."))
-            )
-
-    ));
-
-    private final static Component COMPONENT = new Composite(Arrays.asList(
-            Leaf.word("Word"),
-            Leaf.expression("[expression]"),
-            Leaf.word("word.")
-    ));
+            Leaf.word("Word expression word."),
+            Leaf.word("Word word word.")
+            ));
 
     @Test
     public void testParseShouldReturnComponentWhenDataIsValid() {
         //given
-        AbstractParser sentenceParser = Mockito.mock(SentenceParser.class);
-        when(sentenceParser.parse(anyString())).thenReturn(COMPONENT).thenReturn(COMPONENT);
-        AbstractParser parser = new ParagraphParser();
-        parser.setSuccessor(sentenceParser);
+        Parser sentenceParser = Mockito.mock(SentenceParser.class);
+        when(sentenceParser.parse(anyString())).thenAnswer(invocation -> Leaf.word(invocation.getArgument(0)));
+        Parser parser = new ParagraphParser(sentenceParser);
         //when
         Component actual = parser.parse(TEXT);
         //then

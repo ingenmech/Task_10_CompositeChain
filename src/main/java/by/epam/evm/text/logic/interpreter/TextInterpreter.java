@@ -8,7 +8,8 @@ import by.epam.evm.text.component.LeafType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calculator {
+// think about
+public class TextInterpreter {
 
     private final static String SPLITTER = "_";
     private final static String ANY_DIGIT = "\\d+";
@@ -16,27 +17,26 @@ public class Calculator {
     private final static String EMPTY = "";
 
     // recursion
-    public Component calculate(Component component) {
+    public Component interpret(Component component) {
 
         List<Component> children = component.getChildren();
         if (children.isEmpty()) {
             Leaf leaf = (Leaf) component;
-            return calculateExpression(leaf);
+            return interpretExpression(leaf);
         }
         List<Component> calculatedComponents = new ArrayList<>();
         for (Component child : children) {
-            Component calculatedComponent = calculate(child);
+            Component calculatedComponent = interpret(child);
             calculatedComponents.add(calculatedComponent);
         }
         return new Composite(calculatedComponents);
     }
 
-    private Leaf calculateExpression(Leaf expression) {
+    private Leaf interpretExpression(Leaf expression) {
 
         if (expression.getType() != LeafType.EXPRESSION) {
             return expression;
         }
-
         Context context = new Context();
         String expressionValue = expression.getValue();
         List<AbstractExpression> expressions = parse(expressionValue);
@@ -49,7 +49,6 @@ public class Calculator {
 
         return Leaf.word(value);
     }
-
 
     private List<AbstractExpression> parse(String expression) {
 
@@ -73,7 +72,7 @@ public class Calculator {
                     expressions.add(new DivideExpression());
                     break;
                 default:
-                    if (lexeme.matches(ANY_DIGIT)) {
+                    if (ANY_DIGIT.matches(lexeme)) {
                         int number = Integer.parseInt(lexeme);
                         expressions.add(new NumberExpression(number));
                     }

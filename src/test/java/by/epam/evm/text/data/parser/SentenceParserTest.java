@@ -21,7 +21,7 @@ public class SentenceParserTest {
     @Test
     public void testParseShouldReturnComponentWhenDataIsValid() {
         //given
-        AbstractParser sentenceParser = new SentenceParser();
+        Parser sentenceParser = new SentenceParser();
         //when
         Component actual = sentenceParser.parse(TEXT);
         //then

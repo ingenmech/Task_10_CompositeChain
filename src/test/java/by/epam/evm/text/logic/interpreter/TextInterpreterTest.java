@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class CalculatorTest {
+public class TextInterpreterTest {
 
     private final static Component EXPECTED_TEXT = new Composite(Arrays.asList(
             new Composite(Arrays.asList(
@@ -55,9 +55,9 @@ public class CalculatorTest {
     @Test
     public void testCalculateShouldReturnTextWithCalculatedExpressionWhenDataIsValid(){
 
-        Calculator calculator = new Calculator();
+        TextInterpreter interpreter = new TextInterpreter();
 
-        Component actualText = calculator.calculate(COMPONENT);
+        Component actualText = interpreter.interpret(COMPONENT);
 
         Assert.assertEquals(EXPECTED_TEXT, actualText);
     }

@@ -5,29 +5,35 @@ import by.epam.evm.text.component.Composite;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class AbstractParser implements Parser {
 
     private Parser successor;
 
-    protected void setSuccessor(Parser successor) {
+    public AbstractParser() {
+    }
+
+    public AbstractParser(Parser successor) {
         this.successor = successor;
     }
 
     @Override
     public Component parse(String text) {
 
-        String splitter = createSplitter();
-        String[] nodes = text.split(splitter);
+        String patternValue = createPattern();
+        Pattern pattern = Pattern.compile(patternValue);
+        Matcher matcher = pattern.matcher(text);
         List<Component> components = new ArrayList<>();
 
-        for (String node : nodes) {
+        while (matcher.find()) {
+            String node = matcher.group();
             Component component = successor.parse(node);
             components.add(component);
         }
         return new Composite(components);
     }
 
-    public abstract String createSplitter();
-
+    public abstract String createPattern();
 }

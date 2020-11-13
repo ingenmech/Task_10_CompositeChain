@@ -5,7 +5,7 @@ import by.epam.evm.text.component.Leaf;
 
 import java.util.List;
 
-public class Restorer {
+public class TextRestorer {
 
     private final static String WHITESPACE = " ";
     private final static String NEW_LINE = "\n";
@@ -29,6 +29,7 @@ public class Restorer {
         }
         int lastLine = builder.lastIndexOf(NEW_LINE);
         builder.deleteCharAt(lastLine);
+
         return builder.toString();
     }
 }

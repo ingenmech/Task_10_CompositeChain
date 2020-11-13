@@ -1,6 +1,6 @@
 package by.epam.evm.text.logic.interpreter;
 
-public class MultiplyExpression extends AbstractExpression {
+public class MultiplyExpression implements AbstractExpression {
 
     @Override
     public void interpret(Context context) {

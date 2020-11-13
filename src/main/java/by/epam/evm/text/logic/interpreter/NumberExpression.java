@@ -1,6 +1,6 @@
 package by.epam.evm.text.logic.interpreter;
 
-public class NumberExpression extends AbstractExpression {
+public class NumberExpression implements AbstractExpression {
 
     private final double number;
 

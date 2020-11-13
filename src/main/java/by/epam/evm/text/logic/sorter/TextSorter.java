@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-public class Sorter {
+public class TextSorter {
 
     public Component sortParagraph(Component component) {
 
