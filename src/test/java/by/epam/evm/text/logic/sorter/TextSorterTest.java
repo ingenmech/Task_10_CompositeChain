@@ -1,8 +1,8 @@
 package by.epam.evm.text.logic.sorter;
 
-import by.epam.evm.text.component.Component;
-import by.epam.evm.text.component.Composite;
-import by.epam.evm.text.component.Leaf;
+import by.epam.evm.text.model.Component;
+import by.epam.evm.text.model.Composite;
+import by.epam.evm.text.model.Leaf;
 import org.junit.Assert;
 import org.junit.Test;
 

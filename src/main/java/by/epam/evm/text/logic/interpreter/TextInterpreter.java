@@ -1,9 +1,9 @@
 package by.epam.evm.text.logic.interpreter;
 
-import by.epam.evm.text.component.Component;
-import by.epam.evm.text.component.Composite;
-import by.epam.evm.text.component.Leaf;
-import by.epam.evm.text.component.LeafType;
+import by.epam.evm.text.model.Component;
+import by.epam.evm.text.model.Composite;
+import by.epam.evm.text.model.Leaf;
+import by.epam.evm.text.model.LeafType;
 
 import java.util.ArrayList;
 import java.util.List;

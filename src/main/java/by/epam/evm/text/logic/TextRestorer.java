@@ -1,7 +1,7 @@
 package by.epam.evm.text.logic;
 
-import by.epam.evm.text.component.Component;
-import by.epam.evm.text.component.Leaf;
+import by.epam.evm.text.model.Component;
+import by.epam.evm.text.model.Leaf;
 
 import java.util.List;
 
